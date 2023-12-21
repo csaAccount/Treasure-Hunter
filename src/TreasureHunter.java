@@ -16,6 +16,7 @@ public class TreasureHunter {
     private Town currentTown;
     private Hunter hunter;
     private boolean hardMode;
+    private boolean testMode;
 
     /**
      * Constructs the Treasure Hunter game.
@@ -53,6 +54,10 @@ public class TreasureHunter {
         if (hard.equals("y")) {
             hardMode = true;
         }
+        if (hard.equals("test")) {
+            testMode = true;
+        }
+
     }
 
     /**
@@ -68,11 +73,28 @@ public class TreasureHunter {
             // and the town is "tougher"
             toughness = 0.75;
         }
+        Shop shop = new Shop(markdown);
+        if (testMode) {
+            hunter.changeGold(1000);
+            String[] kitList = new String[6];
+            kitList[0] = "water";
+            kitList[1] = "rope";
+            kitList[2] = "machete";
+            kitList[3] = "horse";
+            kitList[4] = "boat";
+            kitList[5] = "boots";
+            for (int i = 0; i < kitList.length; i++) {
+                int costOfItem = shop.checkMarketPrice(kitList[i], true);
+                hunter.buyItem(kitList[i], costOfItem);
+            }
+            hunter.changeGold(-10000);
+            hunter.changeGold(100);
+        }
+
 
         // note that we don't need to access the Shop object
         // outside of this method, so it isn't necessary to store it as an instance
         // variable; we can leave it as a local variable
-        Shop shop = new Shop(markdown);
 
         // creating the new Town -- which we need to store as an instance
         // variable in this class, since we need to access the Town
@@ -104,6 +126,7 @@ public class TreasureHunter {
             System.out.println("(S)ell something at the shop.");
             System.out.println("(M)ove on to a different town.");
             System.out.println("(L)ook for trouble!");
+            System.out.println("(H)unt for treasure!");
             System.out.println("Give up the hunt and e(X)it.");
             System.out.println();
             System.out.print("What's your next move? ");
