@@ -17,6 +17,7 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
 
+
     /**
      * Constructs the Treasure Hunter game.
      */

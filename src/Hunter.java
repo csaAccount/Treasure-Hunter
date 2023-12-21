@@ -35,7 +35,8 @@ public class Hunter {
     public void changeGold(int modifier) {
         gold += modifier;
         if (gold < 0) {
-            gold = 0;
+            System.out.println("You have lost all your gold! You Lose!");
+            System.exit(0);
         }
     }
 
@@ -199,4 +200,6 @@ public class Hunter {
 
         return -1;
     }
-}
+
+
+    }
