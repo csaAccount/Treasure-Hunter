@@ -76,7 +76,7 @@ public class TreasureHunter {
         }
         Shop shop = new Shop(markdown);
         if (testMode) {
-            hunter.changeGold(1000);
+            hunter.changeGold(46);
             String[] kitList = new String[6];
             kitList[0] = "water";
             kitList[1] = "rope";
@@ -88,7 +88,6 @@ public class TreasureHunter {
                 int costOfItem = shop.checkMarketPrice(kitList[i], true);
                 hunter.buyItem(kitList[i], costOfItem);
             }
-            hunter.changeGold(-10000);
             hunter.changeGold(100);
         }
 
