@@ -11,6 +11,8 @@ public class Town {
     private Terrain terrain;
     private String printMessage;
     private boolean toughTown;
+    private boolean searched;
+
 
     /**
      * The Town Constructor takes in a shop and the surrounding terrain, but leaves the hunter as null until one arrives.
@@ -21,6 +23,7 @@ public class Town {
     public Town(Shop shop, double toughness) {
         this.shop = shop;
         this.terrain = getNewTerrain();
+        searched = false;
 
         // the hunter gets set using the hunterArrives method, which
         // gets called from a client class
@@ -147,5 +150,33 @@ public class Town {
     private boolean checkItemBreak() {
         double rand = Math.random();
         return (rand < 0.5);
+    }
+
+    public void getTownTreasure() {
+        if (searched == false) {
+            searched = true;
+            String treasure = "";
+            double rnd2 = Math.random();
+            if (rnd2 < 0.25) {
+                treasure = "a crown";
+
+            } else if (rnd2 < 0.5) {
+                treasure = "a trophy";
+            } else if (rnd2 < 0.75) {
+                treasure = "a gem";
+            } else if (rnd2 < 1.0) {
+                treasure = "dust";
+            }
+            printMessage = "You found " + treasure;
+            if (!(treasure.equals("dust"))) {
+                if (hunter.hasTreasure(treasure) == false) {
+                    hunter.addTreasure(treasure);
+                } else {
+                    printMessage += "\nYou have already collected this item.";
+                }
+            }
+        }else if (searched == true){
+            printMessage = "You already searched this town";
+        }
     }
 }

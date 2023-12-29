@@ -76,7 +76,6 @@ public class TreasureHunter {
         }
         Shop shop = new Shop(markdown);
         if (testMode) {
-            hunter.changeGold(46);
             String[] kitList = new String[6];
             kitList[0] = "water";
             kitList[1] = "rope";
@@ -84,8 +83,12 @@ public class TreasureHunter {
             kitList[3] = "horse";
             kitList[4] = "boat";
             kitList[5] = "boots";
+            int costOfItem = 0;
             for (int i = 0; i < kitList.length; i++) {
-                int costOfItem = shop.checkMarketPrice(kitList[i], true);
+                costOfItem = shop.checkMarketPrice(kitList[i], true);
+            }
+            hunter.changeGold(costOfItem - 10);
+            for (int i = 0; i < kitList.length; i++) {
                 hunter.buyItem(kitList[i], costOfItem);
             }
             hunter.changeGold(100);
@@ -152,6 +155,8 @@ public class TreasureHunter {
             currentTown.lookForTrouble();
         } else if (choice.equals("x")) {
             System.out.println("Fare thee well, " + hunter.getHunterName() + "!");
+        }else if (choice.equals("h")) {
+            currentTown.getTownTreasure();
         } else {
             System.out.println("Yikes! That's an invalid option! Try again.");
         }

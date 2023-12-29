@@ -8,6 +8,7 @@ public class Hunter {
     //instance variables
     private String hunterName;
     private String[] kit;
+    private String[] collectedTreasures;
     private int gold;
 
     /**
@@ -19,6 +20,7 @@ public class Hunter {
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
         kit = new String[6]; // only 6 possible items can be stored in kit
+        collectedTreasures = new String[3];
         gold = startingGold;
     }
 
@@ -38,6 +40,7 @@ public class Hunter {
             System.out.println("You have lost all your gold! You Lose!");
             System.exit(0);
         }
+
     }
 
     /**
@@ -194,6 +197,39 @@ public class Hunter {
     private int emptyPositionInKit() {
         for (int i = 0; i < kit.length; i++) {
             if (kit[i] == null) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+
+
+//Helper methods for Collected Treasure array
+    public boolean hasTreasure(String item) {
+        for (String tmpItem : collectedTreasures) {
+            if (item.equals(tmpItem)) {
+                // early return
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    public boolean addTreasure(String item) {
+        if (!hasTreasure(item)) {
+            int idx = emptyPositionInTreasure();
+            collectedTreasures[idx] = item;
+            return true;
+        }
+
+        return false;
+    }
+
+    private int emptyPositionInTreasure() {
+        for (int i = 0; i < collectedTreasures.length; i++) {
+            if (collectedTreasures[i] == null) {
                 return i;
             }
         }
