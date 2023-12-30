@@ -170,6 +170,10 @@ public class Town {
             if (!(treasure.equals("dust"))) {
                 if (hunter.hasTreasure(treasure) == false) {
                     hunter.addTreasure(treasure);
+                    if (hunter.hasTreasure("a crown") && hunter.hasTreasure("a trophy") && hunter.hasTreasure("a gem")){
+                        printMessage += "\nCongratulations you have found the last of the three treasures, you win!";
+                        System.exit(0);
+                    }
                 } else {
                     printMessage += "\nYou have already collected this item.";
                 }
