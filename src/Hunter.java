@@ -7,7 +7,7 @@
 public class Hunter {
     //instance variables
     private String hunterName;
-    private String[] kit;
+    private static String[] kit;
     private String[] collectedTreasures;
     private int gold;
 
@@ -19,7 +19,11 @@ public class Hunter {
      */
     public Hunter(String hunterName, int startingGold) {
         this.hunterName = hunterName;
-        kit = new String[6]; // only 6 possible items can be stored in kit
+        if (TreasureHunter.isSamuraiMode()){
+            kit = new String[8];
+        }else{
+            kit = new String[7]; // only 7 possible items can be stored in kit in default modes
+        }
         collectedTreasures = new String[3];
         gold = startingGold;
     }
@@ -50,9 +54,12 @@ public class Hunter {
      * @param costOfItem The cost of the item.
      * @return true if the item is successfully bought.
      */
+    //(!(item.equals("sword")) && costOfItem == 0 )||
     public boolean buyItem(String item, int costOfItem) {
-        if (costOfItem == 0 || gold < costOfItem || hasItemInKit(item)) {
-            return false;
+        if (TreasureHunter.isSamuraiMode() == false || Hunter.hasItemInKit("sword") == false) {
+            if (gold < costOfItem || hasItemInKit(item)) {
+                return false;
+            }
         }
 
         gold -= costOfItem;
@@ -115,7 +122,7 @@ public class Hunter {
      * @param item The search item
      * @return true if the item is found.
      */
-    public boolean hasItemInKit(String item) {
+    public static boolean hasItemInKit(String item) {
         for (String tmpItem : kit) {
             if (item.equals(tmpItem)) {
                 // early return

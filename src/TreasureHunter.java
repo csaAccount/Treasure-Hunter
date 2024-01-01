@@ -17,6 +17,7 @@ public class TreasureHunter {
     private Hunter hunter;
     private boolean hardMode;
     private static boolean easyMode;
+    private static boolean samuraiMode;
     private boolean testMode;
 
 
@@ -29,6 +30,7 @@ public class TreasureHunter {
         hunter = null;
         hardMode = false;
         easyMode = false;
+        samuraiMode = false;
     }
 
     /**
@@ -62,6 +64,10 @@ public class TreasureHunter {
         }
         if (hard.equals("test")) {
             testMode = true;
+        }
+
+        if(hard.equals("s")){
+            samuraiMode = true;
         }
 
     }
@@ -180,4 +186,8 @@ public class TreasureHunter {
     public static boolean isEasyMode(){
         return easyMode;
     }
+    public static boolean isSamuraiMode(){
+        return samuraiMode;
+    }
+
 }
